@@ -1,0 +1,359 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+/* Common */
+
+body {
+    color: #373a3c;
+    font-size: 16px;
+    font-family: source sans pro,sans-serif;
+}
+
+.container {
+    max-width: 72rem;
+    margin: 0 auto;
+} 
+
+*, *::before, *::after {
+    box-sizing: border-box;
+}
+
+button, a {
+    cursor: pointer;
+    outline: 0;
+    text-decoration: none;
+    color: #373a3c;
+
+}
+
+input {
+    outline: 0;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+}
+
+/* Header */
+
+.header_flex {
+    padding: 1.25rem 0rem;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.logo {
+    font-family: titillium web,sans-serif;
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-right: 2rem;
+    color: #5cb85c;
+}
+
+.nav_menu {
+    flex-basis: 30%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    flex-wrap: wrap;
+    color: rgba(0,0,0,.3);
+    padding: 0.425rem 0rem;
+}
+
+.nav_menu button {
+    background-color: transparent;  
+    border: none;
+    color: rgba(0,0,0,.3);
+    padding: 0.425rem 0.5rem;
+    font-size: 1rem;
+}
+
+.nav_menu button:hover {
+    color: rgba(0,0,0,0.7);
+    cursor: pointer;
+}
+
+
+/* Signup & Signin form */
+
+.form_wrapper {
+    width: 60%;
+    margin: 0 auto;
+    margin-top: 3rem;
+    transform: translate(-5%);
+}
+
+.form_input {
+    display: block;
+    margin: 1.5rem 0rem;
+    width: 100%;
+    font-size: 1.35rem;
+    padding: 0.75rem 0.50rem;
+    border: 0.04rem solid rgb(158, 158, 158);
+    border-radius: 0.5rem;
+}
+
+.form {
+   padding: 2rem;
+   width: 100%;
+   
+}
+
+.btn_wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.form_submit {
+    padding: 0.75rem 1.5rem;
+    font-size: 1.25rem;
+    text-transform: capitalize;
+    background-color: #5cb85c;
+    color: #fff;
+    border: none;
+    border-radius: 0.3rem;
+}
+
+.form_heading {
+    font-size: 3.2rem;
+    text-align: center;
+}
+
+.form_link {
+    margin-top: 1rem;
+    text-align: center;
+    
+}
+
+.form_link a {
+    color: #5cb85c;
+}
+
+/* Home Content */
+
+.home_content {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.article_list_wrapper {
+    flex-basis: 65%;
+}
+
+.taglist_wrapper {
+    flex-basis: 30%;
+}
+
+/* Article List */
+
+.list_nav {
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid rgb(229,229,229);
+    margin-bottom: 3rem;
+}
+
+.article_card {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    /* margin-bottom: 3rem; */
+    padding: 1.5rem 0rem;
+    border-bottom: 1px solid rgba(229,229,229);
+}
+
+.article_card_left {
+    flex-basis: 90%;
+}
+
+
+.article_list_btn {
+    font-size: 1rem;
+    margin-right: 1rem;
+    padding: 0.4rem 0.8rem;
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+}
+
+.list_nav li:hover {
+    color: #000;
+}
+
+.article_info {
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+}
+
+.author_image {
+    flex-basis: 3rem;
+    height: 3rem;
+    margin-right: 0.5rem;
+}
+
+.author_image img {
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.author_name {
+    font-size: 1rem;
+    color: #5cb85c;
+    cursor: pointer;
+}
+
+.author_name:hover {
+    text-decoration: underline;
+}
+
+.create_date {
+    font-size: 0.8rem;
+    color: #bbb;
+    margin-top: 0.1rem;
+}
+
+.article_content {
+    margin: 1rem 0rem;
+}
+
+.article_title {
+    font-weight: bold;
+    color: #373A3C;
+    font-size: 1.5rem;
+}
+
+.article_desc {
+    font-size: 1rem;
+    color: #999;
+    margin: 1.5rem 0rem;
+}
+
+.card_footer {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    width: 100%;
+    margin-bottom: 0.05rem;
+}
+
+.read_more {
+    flex-basis: 55%;
+    font-size: 0.8rem;
+    color: #bbb;
+}
+
+.article_card_tag {
+    font-size: 0.8rem;
+    color: #bbb;
+    padding: 0.3rem;
+    border: 1px solid rgb(229,229,229);
+    margin-right: 0.2rem;
+    margin-bottom: 0.2rem;
+    border-radius: 3rem;
+    cursor: pointer;
+}
+
+.card_taglist {
+    flex-basis: 40%;
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    flex-wrap: wrap;
+}
+
+
+/* Taglist */
+
+.taglist_card {
+    padding: 0.5rem 0.625rem;
+    border-radius: 0.25rem;
+    background-color: #f3f3f3;
+}
+
+.taglist {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.taglist_heading {
+    font-size: 1rem;
+    margin-bottom: 1rem;
+}
+
+.taglist_btn {
+    margin: 0.25rem 0.25rem 0rem 0rem;
+    text-align: center;
+    font-size: 0.8rem;
+    padding: 0.1rem 0.6rem;
+    margin-bottom: 0.2rem;
+    background-color: #818a91;
+    border-radius: 10rem;
+    border: none;
+    color: #fff;
+}
+
+.active_filter {
+    border-bottom: 0.15rem solid rgb(92,184,92);
+}
+
+
+
+
+
