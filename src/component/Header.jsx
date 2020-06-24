@@ -1,27 +1,34 @@
 import React from "react";
+// import { Link } from 'react-router';
+import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+
 
 function Header() {
-    return (
-        <header>
-            <div className="container header_flex">
-                <p className="logo">
-                    conduit
-                </p>
+  return (
+    <header>
+      <div className="container header_flex">
+        <p className="logo">conduit</p>
 
-                <ul className="nav_menu">
-                    <li>
-                        <button>Home</button>
-                    </li>
-                    <li>
-                        <button>Sign in</button>
-                    </li>
-                    <li>
-                        <button>Sign up</button>
-                    </li>
-                </ul>
-            </div>
-        </header>
-    )
+        <ul className="nav_menu">
+          <li>
+            <Link to="/">
+              <button>Home</button>
+            </Link>
+          </li>
+          <li>
+            <Link to="/signin">
+              <button>Sign in</button>
+            </Link>
+          </li>
+          <li>
+            <Link to="/register">
+              <button>Sign up</button>
+            </Link>
+          </li>
+        </ul>
+      </div>
+    </header>
+  );
 }
 
 export default Header;
