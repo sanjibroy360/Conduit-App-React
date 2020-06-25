@@ -1,8 +1,6 @@
 import React from "react";
 import ArticleList from "./ArticleList.jsx";
 import PopularTags from "./PopularTags.jsx";
-import Header from "./Header.jsx";
-
 
 class Home extends React.Component {
   constructor(props) {
@@ -19,9 +17,9 @@ class Home extends React.Component {
     if (tagName != this.state.filtered) {
 
       var prevBtn = document.querySelector(".active_filter");
-      if (prevBtn && prevBtn.classList.contains("active_filter")) {
+      // if (prevBtn && prevBtn.classList.contains("active_filter")) {
         prevBtn.classList.remove("active_filter");
-      }
+      // }
 
       if (tagName !== "all") {
         fetch(
@@ -70,8 +68,6 @@ class Home extends React.Component {
   }
   render() {
     return (
-      <>
-      <Header />
       <section className="article_sec">
         <div className="container">
           {this.state.articles && this.state.tags ? (
@@ -91,7 +87,6 @@ class Home extends React.Component {
           )}
         </div>
       </section>
-      </>
     );
   }
 }

@@ -11,18 +11,16 @@ class App extends React.Component {
         
     }
 
-    handleChange = () => {
-
-    }
-
     render() {
         return (
+            <>
+            <Header />
             <Switch>
                 <Route path="/" component={Home} exact/>
-                
                 <Route path="/register" component={Signup} />
                 <Route path="/signin" component={Signin} />
             </Switch>
+            </>
         )
     }
 }
