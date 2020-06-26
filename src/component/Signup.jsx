@@ -1,25 +1,35 @@
 import React from "react";
 
 class Signup extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       username: "",
       email: "",
       password: "",
-      userInfo: null
     };
   }
 
-  handleInput = ({target : {name, value}}) => {
-    this.setState({[name]:value})
-  }
+  handleInput = ({ target: { name, value } }) => {
+    this.setState({ [name]: value });
+  };
 
-  componentDidMount() {
+  handleSubmit = (event) => {
+
     // fetch("https://conduit.productionready.io/api/users/login")
-    fetch("https://conduit.productionready.io/api/users")
-    .then(res => res.json())
-    .then({user} => this.setState({userInfo: user}))
+    
+    var url = "https://conduit.productionready.io/api/users";
+    fetch("https://conduit.productionready.io/api/users", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ user: this.state }),
+    })
+      .then((res) => {
+        if(res.status == 200) {
+          this.props.history.push("/signin")
+        }
+      })
+      
   }
 
   render() {
@@ -30,7 +40,7 @@ class Signup extends React.Component {
           <p className="form_link">
             <a href="/signin">Have an account ?</a>
           </p>
-          <form action="#" method="POST" className="form">
+          <div  className="form">
             {" "}
             {/*/api/users*/}
             <input
@@ -55,9 +65,9 @@ class Signup extends React.Component {
               name="password"
             />
             <div className="btn_wrapper">
-              <input type="submit" value="Sign in" className="form_submit" />
+              <input onClick={this.handleSubmit} type="submit" value="Sign in" className="form_submit" />
             </div>
-          </form>
+          </div>
         </div>
       </div>
     );

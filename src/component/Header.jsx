@@ -1,8 +1,11 @@
 import React from "react";
-import { BrowserRouter, Route, Switch, Link } from 'react-router-dom';
+import { BrowserRouter, Route, Switch, NavLink } from "react-router-dom";
 
+function Header(props) {
+  return props.isLoggedIn ? loggedInHeader() : notLoggedInHeader();
+}
 
-function Header() {
+function notLoggedInHeader() {
   return (
     <header>
       <div className="container header_flex">
@@ -10,19 +13,53 @@ function Header() {
 
         <ul className="nav_menu">
           <li>
-            <Link to="/">
-              <button>Home</button>
-            </Link>
+            <NavLink activeClassName="active_header" to="/">
+              Home
+            </NavLink>
           </li>
           <li>
-            <Link to="/signin">
-              <button>Sign in</button>
-            </Link>
+            <NavLink activeClassName="active_header" to="/signin">
+              Sign in
+            </NavLink>
           </li>
           <li>
-            <Link to="/register">
-              <button>Sign up</button>
-            </Link>
+            <NavLink to="/register">
+              Sign up
+            </NavLink>
+          </li>
+        </ul>
+      </div>
+    </header>
+  );
+}
+
+function loggedInHeader() {
+  return (
+    <header>
+      <div className="container header_flex">
+        <p className="logo">conduit</p>
+
+        <ul className="nav_menu">
+          <li>
+            <NavLink activeClassName="active_header" to="/">
+              Home
+            </NavLink>
+          </li>
+          <li>
+            <NavLink activeClassName="active_header" to="/article/new">
+              New Post
+            </NavLink>
+          </li>
+          <li>
+            <NavLink activeClassName="active_header" to="/register">
+              Settings
+            </NavLink>
+          </li>
+
+          <li>
+            <NavLink activeClassName="active_header" to="/register">
+              Sanjib
+            </NavLink>
           </li>
         </ul>
       </div>
