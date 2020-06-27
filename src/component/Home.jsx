@@ -14,8 +14,8 @@ class Home extends React.Component {
 
   handleClick = (tagName, event) => {
     
-    if (tagName != this.state.filtered) {
-
+    if (tagName !== this.state.filtered) {
+      var filterBtn;
       var prevBtn = document.querySelector(".active_filter");
       // if (prevBtn && prevBtn.classList.contains("active_filter")) {
         prevBtn.classList.remove("active_filter");
@@ -31,7 +31,7 @@ class Home extends React.Component {
           )
           .catch((error) => console.log(error));
 
-        var filterBtn = document.querySelector(".filter_btn");
+        filterBtn = document.querySelector(".filter_btn");
         if (filterBtn) {
           filterBtn.classList.add("active_filter");
         }
@@ -45,7 +45,7 @@ class Home extends React.Component {
           )
           .catch((error) => alert(error));
 
-        var filterBtn = document.querySelector(".all_btn");
+        filterBtn = document.querySelector(".all_btn");
         filterBtn.classList.add("active_filter");
       }
     } else {
@@ -54,14 +54,14 @@ class Home extends React.Component {
   };
 
   componentDidMount() {
-    var articles = fetch(
+    fetch(
       "https://conduit.productionready.io/api/articles?limit=10&offset=0"
     )
       .then((response) => response.json())
       .then((data) => this.setState({ articles: data.articles }))
       .catch((error) => alert(error));
 
-    var tags = fetch("https://conduit.productionready.io/api/tags")
+    fetch("https://conduit.productionready.io/api/tags")
       .then((response) => response.json())
       .then((data) => this.setState({ tags: data.tags }))
       .catch((error) => alert(error));

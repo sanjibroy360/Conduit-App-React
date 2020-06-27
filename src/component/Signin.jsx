@@ -22,7 +22,7 @@ class Signin extends React.Component {
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ user: this.state }),
     }).then((res) => {
-        if (res.status == 200) {
+        if (res.status === 200) {
           this.props.history.push("/");
           this.props.updateLoggedIn(true);
         }

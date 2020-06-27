@@ -6,7 +6,8 @@ import Home from "./Home.jsx";
 import CreateArticle from "./CreateArticle.jsx";
 import Loader from "./Loader.jsx"
 import ArticlePage from "./ArticlePage.jsx";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import EditArticle from "./EditArticle.jsx"
+import { Route, Switch } from "react-router-dom";
 
 class App extends React.Component {
   constructor(props) {
@@ -24,7 +25,7 @@ class App extends React.Component {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Token ${localStorage.authToken}`,
+        "authorization": `Token ${localStorage.authToken}`,
       },
     })
       .then((res) => res.json())
@@ -39,6 +40,10 @@ class App extends React.Component {
     if (!this.state.isLoggedIn) {
       return <Loader size="5" />;
     }
+    if(!localStorage.currentUser && this.state.userInfo) {
+      
+      localStorage.setItem("currentUser", JSON.stringify(this.state.userInfo));
+    }
     return (
       <>
         <Header isLoggedIn={this.state.isLoggedIn} />
@@ -50,6 +55,7 @@ class App extends React.Component {
             render={() => <Signin updateLoggedIn={this.updateLoggedIn} />}
           />
           <Route path="/article/new" component={CreateArticle} />
+          <Route path="/article/edit/:slug" component={EditArticle} />
           <Route path="/article/:slug" component={ArticlePage} />
         </Switch>
       </>

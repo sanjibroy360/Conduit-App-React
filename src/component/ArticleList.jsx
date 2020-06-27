@@ -34,7 +34,7 @@ function ArticleList(props) {
                 <div className="article_card_left">
                   <div className="article_info">
                     <div className="author_image">
-                      <img src={article.author.image} />
+                      <img src={article.author.image} alt="User" />
                     </div>
                     <div>
                       <p className="author_name">

@@ -1,10 +1,13 @@
 import React from "react";
 import Loader from "./Loader.jsx";
+import Comment from "./Comment.jsx";
+import { Link } from "react-router-dom";
 
 class ArticlePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      user: JSON.parse(localStorage.getItem("currentUser")).username,
       slug: props.match.params.slug,
       articleDetails: null,
     };
@@ -28,14 +31,10 @@ class ArticlePage extends React.Component {
     if (!this.state.articleDetails) {
       return <Loader />;
     }
-    console.log(this.state);
-    let username = this.state.articleDetails.author.username;
-    let createdAt = this.state.articleDetails.createdAt;
-    let title = this.state.articleDetails.title;
-    let description = this.state.articleDetails.description;
-    let image = this.state.articleDetails.author.image;
-    let tagList = this.state.articleDetails.tagList.slice();
-    let content = this.state.articleDetails.body;
+
+    let { createdAt, title, tagList, body } = this.state.articleDetails;
+    let { username, image } = this.state.articleDetails.author;
+    
     return (
       <>
         <div className="article_page_header">
@@ -43,7 +42,7 @@ class ArticlePage extends React.Component {
             <h1 className="article_heading">{title}</h1>
             <div className="article_details_wrapper">
               <div className="article_author_image">
-                <img src={image} alt="User's Image" />
+                <img src={image} alt="Author" />
               </div>
 
               <div className="article_details">
@@ -57,24 +56,33 @@ class ArticlePage extends React.Component {
                     .join(" / ")}
                 </p>
               </div>
-
-              <div className="article_details_btns">
-                <button>Edit Article</button>
-                <button className="del_btn">Delete Article</button>
-              </div>
+              
+              {this.state.user == username ? (
+                <div className="article_details_btns">
+                  <Link to={`/article/edit/${this.state.slug}`}>
+                    <button className="edit_btn">Edit Article</button>
+                  </Link>
+                  <button className="del_btn">Delete Article</button>
+                </div>
+              ) : (
+                ""
+              )}
             </div>
           </div>
         </div>
         <div className="article_content_part">
           <div className="container">
+            <p className="article_content">{body}</p>
             <ul className="taglist articlee_page_taglist">
               {tagList.map((tag) => {
                 return <li className="taglist_btn">{tag}</li>;
               })}
             </ul>
-            <p className="article_content">{content}</p>
+            <hr />
+
+            <Comment />
           </div>
-        </div>{" "}
+        </div>
       </>
     );
   }

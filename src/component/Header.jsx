@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch, NavLink } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 function Header(props) {
   return props.isLoggedIn ? loggedInHeader() : notLoggedInHeader();
@@ -13,7 +13,7 @@ function notLoggedInHeader() {
 
         <ul className="nav_menu">
           <li>
-            <NavLink activeClassName="active_header" to="/">
+            <NavLink activeClassName="active_header" exact={true} to="/">
               Home
             </NavLink>
           </li>
@@ -23,9 +23,7 @@ function notLoggedInHeader() {
             </NavLink>
           </li>
           <li>
-            <NavLink to="/register">
-              Sign up
-            </NavLink>
+            <NavLink to="/register">Sign up</NavLink>
           </li>
         </ul>
       </div>
@@ -41,7 +39,7 @@ function loggedInHeader() {
 
         <ul className="nav_menu">
           <li>
-            <NavLink activeClassName="active_header" to="/">
+            <NavLink activeClassName="active_header" exact to="/">
               Home
             </NavLink>
           </li>

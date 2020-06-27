@@ -1,5 +1,5 @@
 import React from "react";
-import "./Loader.css";
+import "../stylesheets/Loader.css";
 
 export default function Loader({ size }) {
   return (
