@@ -34,7 +34,7 @@ class EditArticle extends React.Component {
         "Content-Type": "application/json",
         "authorization": `Token ${localStorage.getItem("authToken")}`,
       },
-      body: JSON.stringify({ article: this.state }),
+      body: JSON.stringify({ article: this.state.articleDetails }),
     }).then((res) => {
       console.log({ res });
       console.log({ article: this.state });

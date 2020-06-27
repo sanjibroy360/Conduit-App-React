@@ -13,6 +13,20 @@ class ArticlePage extends React.Component {
     };
   }
 
+  handleDelete = () => {
+    fetch(`https://conduit.productionready.io/api/articles/${this.state.slug}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        "authorization": `Token ${localStorage.authToken}`,
+      },
+    }).then(res => {
+      if(res.status === 200) {
+        return this.props.history.push("/");
+      }
+    })
+  }
+
   componentDidMount() {
     var url = `https://conduit.productionready.io/api/articles/${this.state.slug}`;
 
@@ -20,7 +34,7 @@ class ArticlePage extends React.Component {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
-        authorization: `Token ${localStorage.authToken}`,
+        "authorization": `Token ${localStorage.authToken}`,
       },
     })
       .then((res) => res.json())
@@ -62,7 +76,7 @@ class ArticlePage extends React.Component {
                   <Link to={`/article/edit/${this.state.slug}`}>
                     <button className="edit_btn">Edit Article</button>
                   </Link>
-                  <button className="del_btn">Delete Article</button>
+                  <button onClick={this.handleDelete} className="del_btn">Delete Article</button>
                 </div>
               ) : (
                 ""
