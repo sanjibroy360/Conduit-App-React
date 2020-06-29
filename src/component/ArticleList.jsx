@@ -5,16 +5,37 @@ function ArticleList(props) {
   return (
     <div className="article_list_wrapper">
       <ul className="list_nav">
+        {props.isLoggedIn ? (
+          <>
+            <li>
+              <button
+                onClick={(event) => props.handleClick("yourFeed", event)}
+                className="active_filter article_list_btn your_feed_btn"
+              >
+                Your Feed
+              </button>
+            </li>
+            <li>
+              <button
+                onClick={(event) => props.handleClick("all", event)}
+                className="article_list_btn all_btn"
+              >
+                Global Feed
+              </button>
+            </li>
+          </>
+        ) : (
+          <li>
+            <button
+              onClick={(event) => props.handleClick("all", event)}
+              className="active_filter article_list_btn all_btn"
+            >
+              Global Feed
+            </button>
+          </li>
+        )}
         <li>
-          <button
-            onClick={(event) => props.handleClick("all", event)}
-            className="active_filter article_list_btn all_btn"
-          >
-            Global Feed
-          </button>
-        </li>
-        <li>
-          {props.filtered !== "all" ? (
+          {props.filtered !== "all" && props.filtered !== "yourFeed" ? (
             <button
               className="article_list_btn active_filter filter_btn"
               onClick={(event) => props.handleClick(props.filtered, event)}
@@ -29,7 +50,7 @@ function ArticleList(props) {
       <ul>
         {props.articles.map((article) => {
           return (
-            <Link to={`/article/${article.slug}`}>
+            // <Link to={`/article/${article.slug}`}>
               <li className="article_card">
                 <div className="article_card_left">
                   <div className="article_info">
@@ -38,11 +59,24 @@ function ArticleList(props) {
                     </div>
                     <div>
                       <p className="author_name">
-                        <a href="#" className="author_name">
+                        <Link
+                          to={`/user/profile/${article.author.username}`}
+                          className="author_name"
+                          onClick={() =>
+                            props.handleProfileVisit(article.author.username)
+                          }
+                        >
                           {article.author.username}
-                        </a>
+                        </Link>
                       </p>
-                      <p className="create_date">{article.createdAt}</p>
+                      <p className="create_date">
+                        {article.createdAt
+                          .toString()
+                          .slice(0, 10)
+                          .split("-")
+                          .reverse()
+                          .join(" / ")}
+                      </p>
                     </div>
                   </div>
 
@@ -53,15 +87,40 @@ function ArticleList(props) {
                 </div>
 
                 <div className="article_card_right">
-                  <button>{article.favoritesCount}</button>
+                  {article.favorited ? (
+                    <button
+                      className="favorited"
+                      onClick={(event) =>
+                        props.handleFavorited(
+                          event,
+                          article.slug,
+                          article.favorited
+                        )
+                      }
+                    >
+                      {article.favoritesCount}
+                    </button>
+                  ) : (
+                    <button
+                      onClick={(event) =>
+                        props.handleFavorited(
+                          event,
+                          article.slug,
+                          article.favorited
+                        )
+                      }
+                    >
+                      {article.favoritesCount}
+                    </button>
+                  )}
                 </div>
 
                 <div className="card_footer">
                   <p>
-                    <a href="#" className="read_more">
+                    <Link to={`/article/${article.slug}`} className="read_more">
                       {" "}
                       Read More...
-                    </a>
+                    </Link>
                   </p>
                   <ul className="card_taglist">
                     {article.tagList.length
@@ -72,7 +131,7 @@ function ArticleList(props) {
                   </ul>
                 </div>
               </li>
-            </Link>
+            // </Link>
           );
         })}
       </ul>

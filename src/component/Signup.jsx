@@ -15,22 +15,17 @@ class Signup extends React.Component {
   };
 
   handleSubmit = (event) => {
-
-    // fetch("https://conduit.productionready.io/api/users/login")
-    
     var url = "https://conduit.productionready.io/api/users";
     fetch(url, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ user: this.state }),
-    })
-      .then((res) => {
-        if(res.status === 200) {
-          this.props.history.push("/signin")
-        }
-      })
-      
-  }
+    }).then((res) => {
+      if (res.status === 200) {
+        this.props.history.push("/signin");
+      }
+    });
+  };
 
   render() {
     return (
@@ -40,7 +35,7 @@ class Signup extends React.Component {
           <p className="form_link">
             <a href="/signin">Have an account ?</a>
           </p>
-          <div  className="form">
+          <div className="form">
             {" "}
             {/*/api/users*/}
             <input
@@ -65,7 +60,12 @@ class Signup extends React.Component {
               name="password"
             />
             <div className="btn_wrapper">
-              <input onClick={this.handleSubmit} type="submit" value="Sign in" className="form_submit" />
+              <input
+                onClick={this.handleSubmit}
+                type="submit"
+                value="Sign in"
+                className="form_submit"
+              />
             </div>
           </div>
         </div>

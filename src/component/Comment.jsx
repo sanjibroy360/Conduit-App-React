@@ -1,6 +1,48 @@
 import React, { Component } from "react";
+import { withRouter } from "react-router-dom";
 
 class Comment extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      comment: {
+        body: "",
+      },
+    };
+  }
+
+  handleInput = (event) => {
+    this.setState({
+      comment: {
+        body: event.target.value,
+      },
+    });
+  };
+
+  handleSubmit = () => {
+    var slug = this.props.slug;
+    console.log(slug, "slug...");
+    var route = `/article/${slug}`;
+    var url = `https://conduit.productionready.io/api/articles/${slug}/comments`;
+    fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Token ${localStorage.authToken}`,
+      },
+      body: JSON.stringify(this.state),
+    })
+      .then((res) => res.json())
+      .then((comment) => {
+        this.props.updateCommentList(comment);
+        this.setState({
+          comment: {
+            body: "",
+          },
+        });
+      });
+  };
+
   render() {
     return (
       <div className="comment_form">
@@ -9,6 +51,8 @@ class Comment extends Component {
           rows="10"
           placeholder="Write a Comment..."
           className="comment_textarea"
+          onChange={this.handleInput}
+          value={this.state.comment.body}
         ></textarea>
         <div className="comment_btn_wrapper">
           <input
@@ -23,4 +67,4 @@ class Comment extends Component {
   }
 }
 
-export default Comment;
+export default withRouter(Comment);

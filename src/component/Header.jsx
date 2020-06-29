@@ -1,15 +1,17 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 
 function Header(props) {
-  return props.isLoggedIn ? loggedInHeader() : notLoggedInHeader();
+  return props.isLoggedIn ? loggedInHeader(props) : notLoggedInHeader(props);
 }
 
-function notLoggedInHeader() {
+function notLoggedInHeader(props) {
   return (
     <header>
       <div className="container header_flex">
-        <p className="logo">conduit</p>
+        <p>
+          <Link to="/" className="logo">conduit</Link>
+        </p>
 
         <ul className="nav_menu">
           <li>
@@ -31,11 +33,13 @@ function notLoggedInHeader() {
   );
 }
 
-function loggedInHeader() {
+function loggedInHeader(props) {
   return (
     <header>
       <div className="container header_flex">
-        <p className="logo">conduit</p>
+        <p>
+          <Link to="/" className="logo">conduit</Link>
+        </p>
 
         <ul className="nav_menu">
           <li>
@@ -49,14 +53,14 @@ function loggedInHeader() {
             </NavLink>
           </li>
           <li>
-            <NavLink activeClassName="active_header" to="/register">
+            <NavLink activeClassName="active_header" to={`/setting/${props.userInfo.username}`}>
               Settings
             </NavLink>
           </li>
 
           <li>
-            <NavLink activeClassName="active_header" to="/register">
-              Sanjib
+            <NavLink activeClassName="active_header" to={`/user/profile/${props.userInfo.username}`} onClick={() => props.handleProfileVisit(props.userInfo.username)}>
+              {props.userInfo.username}
             </NavLink>
           </li>
         </ul>

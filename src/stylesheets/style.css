@@ -432,7 +432,7 @@ img {
   color: #fff;
 }
 
-.active_filter {
+.active_filter, .active_filterParam {
   border-bottom: 0.15rem solid rgb(92, 184, 92);
 }
 
@@ -573,4 +573,103 @@ hr {
   color: #fff;
   background-color: #5cb85c;
   border-color: #5cb85c;
+}
+
+
+/* Comment Card */
+
+.comment_card_footer {
+  display: flex;
+  width: 100%;
+  margin: 0 auto;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0.25rem;
+  background-color: rgb(245,245,245);
+  border-top: 1px solid #e5e5e5;
+}
+
+.comment_footer_left {
+  flex-basis: 40%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.comment_card_footer .author_name {
+  font-size: 0.8rem;
+  margin: 0.25rem 0rem;
+}
+
+.author_small_image {
+  width: 1.25rem;
+  border-radius: 50%;
+}
+
+.comment_date {
+  font-size: 0.6rem;
+  color: #c5c2c2;
+}
+
+.comment_del_btn {
+  margin-right: 0.5rem;
+}
+
+/* Profile */
+
+.profile_hero_sec {
+  padding: 1rem 0rem 0.5rem;
+  background-color: rgb(243,243,243);
+  margin-bottom: 3rem;
+}
+
+.profile_info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 60%;
+  
+  padding: 1rem 0rem;
+  margin: 0 auto;
+}
+
+.user_image_wrapper {
+  width: 10rem;
+  height: 10rem;
+  overflow: hidden;
+  border-radius: 50%;
+  margin: 0 auto;
+}
+
+.user_image_wrapper img {
+  border-radius: 50%;
+  object-fit: cover;
+  
+}
+
+.profile_username {
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.5rem;
+  padding: 0.5rem 0rem;
+}
+
+.follow_btn_wrapper {
+  display: flex;
+  flex-direction: row-reverse;
+}
+
+.follow_btn {
+  background-color: transparent;
+  color: #999;
+  border: 1px solid #999;
+  font-size: 0.875rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.2rem;
+}
+
+.favorited {
+  background-color: seagreen;
+  color: #fff;
+  border: none;
 }
