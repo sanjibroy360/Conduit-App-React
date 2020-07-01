@@ -22,6 +22,14 @@ class App extends React.Component {
     };
   }
 
+  handleLogOut = () => {
+    this.setState({isLoggedIn: false, userInfo: null, profileVisit:'', profile: null});
+    localStorage.removeItem("currentUser");
+    localStorage.removeItem("authToken");
+  }
+
+  
+
   updateProfile = (event, updatedUserInfo) => {
     var url = "https://conduit.productionready.io/api/user";
     fetch(url, {
@@ -33,12 +41,12 @@ class App extends React.Component {
       body: JSON.stringify( updatedUserInfo ),
     })
       .then((res) => res.json())
-      .then((userInfo) => {
-        if(userInfo.status === 200) {
-          this.setState({ userInfo });
-        }
-        return userInfo;
+      .then(({user}) => {
+        console.log(user);
+        console.log(this.state.userInfo);
+        this.setState({ userInfo: user })
       });
+  
   };
 
   handleFollow = (isFollowing) => {
@@ -98,20 +106,26 @@ class App extends React.Component {
       console.log("Called App.jsx");
     }
 
-    if (this.state.userInfo !== prevState.userInfo) {
-      alert("App jsx")
-      this.props.history.push(`/`)
+    if (this.state.userInfo !== prevState.userInfo || (!this.state.isLoggedIn && prevState.isLoggedIn) ) {
+      // alert("App jsx")
+      this.props.history.push(`/`);
     }
+
+    
 
   }
 
-  updateLoggedIn = (status) => {
-    this.setState({ isLoggedIn: status });
+  updateLoggedIn = (status, user) => {
+    this.setState({ isLoggedIn: status, userInfo: user });
+    localStorage.setItem("authToken", user.token);
   };
 
   render() {
+    // if(this.state.isLoggedIn) {
+    //   alert("logged in")
+    // }
     if (
-      !this.state.isLoggedIn ||
+      (!this.state.isLoggedIn && this.userInfo)||
       (this.state.profileVisit && !this.state.profile) ||
       (this.state.profile &&
         this.state.profileVisit !== this.state.profile.username)
@@ -174,6 +188,7 @@ class App extends React.Component {
               <Setting
                 currentUser={this.state.userInfo}
                 updateProfile={this.updateProfile}
+                handleLogOut={this.handleLogOut}
               />
             )}
           />

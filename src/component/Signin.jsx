@@ -24,11 +24,11 @@ class Signin extends React.Component {
     }).then((res) => {
         if (res.status === 200) {
           this.props.history.push("/");
-          this.props.updateLoggedIn(true);
+          
         }
         return res.json();
       })
-      .then(({user}) => localStorage.setItem("authToken",user.token))
+      .then(({user}) => this.props.updateLoggedIn(true,user))
       .catch(err => console.log(err));
       // .this(({ user }) => console.log(user));
   };

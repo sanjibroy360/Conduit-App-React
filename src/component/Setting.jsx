@@ -77,7 +77,9 @@ class CreateArtilce extends React.Component {
               />
             </div>
           </div>
+          <button onClick={this.props.handleLogOut}>Log Out</button>
         </div>
+       
       </div>
     );
   }

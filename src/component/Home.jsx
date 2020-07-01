@@ -17,10 +17,7 @@ class Home extends React.Component {
     alert(isFavorited)
     var url = `https://conduit.productionready.io/api/articles/${slug}/favorite`;
     var method;
-    // var prevBtn = document.querySelector(".favorited");
-    // if(prevBtn) {
-    //   prevBtn.classList.remove("favorited");
-    // }
+    
     if (!isFavorited) {
       method = "POST";
       event.target.classList.add("favorited");
@@ -115,6 +112,7 @@ class Home extends React.Component {
 
   componentDidMount() {
     if (!this.props.isLoggedIn) {
+      
       fetch("https://conduit.productionready.io/api/articles?limit=10&offset=0")
         .then((response) => response.json())
         .then((data) =>

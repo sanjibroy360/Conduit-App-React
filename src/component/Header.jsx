@@ -1,5 +1,6 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
+import Loader from "./Loader";
 
 function Header(props) {
   return props.isLoggedIn ? loggedInHeader(props) : notLoggedInHeader(props);
@@ -34,7 +35,11 @@ function notLoggedInHeader(props) {
 }
 
 function loggedInHeader(props) {
+  if(!props.userInfo) {
+    return <Loader />
+  }
   return (
+    
     <header>
       <div className="container header_flex">
         <p>
