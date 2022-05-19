@@ -21,8 +21,6 @@ class Comment extends Component {
 
   handleSubmit = () => {
     var slug = this.props.slug;
-    console.log(slug, "slug...");
-    var route = `/article/${slug}`;
     var url = `https://conduit.productionready.io/api/articles/${slug}/comments`;
     fetch(url, {
       method: "POST",
