@@ -24,7 +24,6 @@ class Signin extends React.Component {
     }).then((res) => {
         if (res.status === 200) {
           this.props.history.push("/");
-          
         }
         return res.json();
       })

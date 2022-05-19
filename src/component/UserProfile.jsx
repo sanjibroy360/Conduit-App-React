@@ -17,17 +17,16 @@ class UserProfile extends Component {
   componentDidMount() {
     var url = `https://conduit.productionready.io/api/profiles/${this.state.username}`;
 
-      fetch(url, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Token ${localStorage.getItem("authToken")}`,
-        },
-      })
-        .then((res) => res.json())
-        .then(({ profile }) => this.setState({ user: profile }))
-        .catch((error) => alert(error));
-
+    fetch(url, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        authorization: `Token ${localStorage.getItem("authToken")}`,
+      },
+    })
+      .then((res) => res.json())
+      .then(({ profile }) => this.setState({ user: profile }))
+      .catch((error) => console.error(error));
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -92,7 +91,8 @@ class UserProfile extends Component {
             </div>
             <p className="profile_username">{user.username}</p>
             <div className="follow_btn_wrapper">
-              {this.state.currentUser.username && this.state.currentUser.username !== this.state.username ? (
+              {this.state.currentUser.username &&
+              this.state.currentUser.username !== this.state.username ? (
                 <button
                   className="follow_btn"
                   onClick={() => this.props.handleFollow(user.following)}

@@ -13,19 +13,16 @@ class Home extends React.Component {
   }
 
   handleFavorited = (event, slug, isFavorited) => {
-  
-    alert(isFavorited)
+    console.error(isFavorited);
     var url = `https://conduit.productionready.io/api/articles/${slug}/favorite`;
     var method;
-    
+
     if (!isFavorited) {
       method = "POST";
       event.target.classList.add("favorited");
-
-      
     } else {
       method = "DELETE";
-      if(event.target.classList.contains("favorited")) {
+      if (event.target.classList.contains("favorited")) {
         event.target.classList.remove("favorited");
       }
     }
@@ -38,19 +35,19 @@ class Home extends React.Component {
       },
     })
       .then((res) => res.json())
-      .then(({article}) => {
-        var index = this.state.articles.findIndex(el => article.slug === el.slug);
+      .then(({ article }) => {
+        var index = this.state.articles.findIndex(
+          (el) => article.slug === el.slug
+        );
 
-        this.state.articles.map(el => console.log(el));
-        
+        this.state.articles.map((el) => console.log(el));
 
         var copyArr = this.state.articles.slice();
-        console.log("###################################")
+        console.log("###################################");
         console.log(copyArr[index], index, article);
         copyArr[index].favorited = article.favorited;
         copyArr[index].favoritesCount = article.favoritesCount;
-        this.setState({articles: copyArr});
-
+        this.setState({ articles: copyArr });
       });
   };
 
@@ -82,7 +79,7 @@ class Home extends React.Component {
           .then((data) =>
             this.setState({ articles: data.articles, filtered: tagName })
           )
-          .catch((error) => alert(error));
+          .catch((error) => console.error(error));
 
         filterBtn = document.querySelector(".all_btn");
         filterBtn.classList.add("active_filter");
@@ -100,7 +97,7 @@ class Home extends React.Component {
           .then((data) =>
             this.setState({ articles: data.articles, filtered: tagName })
           )
-          .catch((error) => alert(error));
+          .catch((error) => console.error(error));
 
         filterBtn = document.querySelector(".your_feed_btn");
         filterBtn.classList.add("active_filter");
@@ -112,13 +109,12 @@ class Home extends React.Component {
 
   componentDidMount() {
     if (!this.props.isLoggedIn) {
-      
       fetch("https://conduit.productionready.io/api/articles?limit=10&offset=0")
         .then((response) => response.json())
         .then((data) =>
           this.setState({ articles: data.articles, filtered: "all" })
         )
-        .catch((error) => alert(error));
+        .catch((error) => console.error(error));
     } else {
       fetch(
         `https://conduit.productionready.io/api/articles/feed?limit=10&offset=0`,
@@ -134,12 +130,12 @@ class Home extends React.Component {
         .then((data) =>
           this.setState({ articles: data.articles, filtered: "yourFeed" })
         )
-        .catch((error) => alert(error));
+        .catch((error) => console.error(error));
     }
     fetch("https://conduit.productionready.io/api/tags")
       .then((response) => response.json())
       .then((data) => this.setState({ tags: data.tags }))
-      .catch((error) => alert(error));
+      .catch((error) => console.error(error));
   }
   render() {
     return (

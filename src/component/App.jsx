@@ -9,7 +9,7 @@ import ArticlePage from "./ArticlePage.jsx";
 import EditArticle from "./EditArticle.jsx";
 import UserProfile from "./UserProfile.jsx";
 import Setting from "./Setting.jsx";
-import { withRouter,Route, Switch } from "react-router-dom";
+import { withRouter, Route, Switch } from "react-router-dom";
 
 class App extends React.Component {
   constructor(props) {
@@ -23,12 +23,15 @@ class App extends React.Component {
   }
 
   handleLogOut = () => {
-    this.setState({isLoggedIn: false, userInfo: null, profileVisit:'', profile: null});
+    this.setState({
+      isLoggedIn: false,
+      userInfo: null,
+      profileVisit: "",
+      profile: null,
+    });
     localStorage.removeItem("currentUser");
     localStorage.removeItem("authToken");
-  }
-
-  
+  };
 
   updateProfile = (event, updatedUserInfo) => {
     var url = "https://conduit.productionready.io/api/user";
@@ -38,15 +41,14 @@ class App extends React.Component {
         "Content-Type": "application/json",
         authorization: `Token ${localStorage.getItem("authToken")}`,
       },
-      body: JSON.stringify( updatedUserInfo ),
+      body: JSON.stringify(updatedUserInfo),
     })
       .then((res) => res.json())
-      .then(({user}) => {
+      .then(({ user }) => {
         console.log(user);
         console.log(this.state.userInfo);
-        this.setState({ userInfo: user })
+        this.setState({ userInfo: user });
       });
-  
   };
 
   handleFollow = (isFollowing) => {
@@ -76,16 +78,19 @@ class App extends React.Component {
 
   componentDidMount() {
     var url = "https://conduit.productionready.io/api/user";
-
-    fetch(url, {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        authorization: `Token ${localStorage.authToken}`,
-      },
-    })
-      .then((res) => res.json())
-      .then(({ user }) => this.setState({ isLoggedIn: true, userInfo: user }));
+    if (localStorage.authToken) {
+      fetch(url, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          authorization: `Token ${localStorage.authToken}`,
+        },
+      })
+        .then((res) => res.json())
+        .then(({ user }) =>
+          this.setState({ isLoggedIn: true, userInfo: user })
+        );
+    }
   }
 
   componentDidUpdate(_prevProps, prevState) {
@@ -101,31 +106,28 @@ class App extends React.Component {
       })
         .then((res) => res.json())
         .then(({ profile }) => this.setState({ profile }))
-        .catch((error) => alert(error));
+        .catch((error) => console.error(error));
 
       console.log("Called App.jsx");
     }
 
-    if (this.state.userInfo !== prevState.userInfo || (!this.state.isLoggedIn && prevState.isLoggedIn) ) {
-      // alert("App jsx")
+    if (
+      this.state.userInfo !== prevState.userInfo ||
+      (!this.state.isLoggedIn && prevState.isLoggedIn)
+    ) {
       this.props.history.push(`/`);
     }
-
-    
-
   }
 
   updateLoggedIn = (status, user) => {
     this.setState({ isLoggedIn: status, userInfo: user });
+    console.log(user);
     localStorage.setItem("authToken", user.token);
   };
 
   render() {
-    // if(this.state.isLoggedIn) {
-    //   alert("logged in")
-    // }
     if (
-      (!this.state.isLoggedIn && this.userInfo)||
+      (!this.state.isLoggedIn && this.userInfo) ||
       (this.state.profileVisit && !this.state.profile) ||
       (this.state.profile &&
         this.state.profileVisit !== this.state.profile.username)
